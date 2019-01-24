@@ -14,7 +14,6 @@ from numbers import Integral
 from threading import Lock
 import uuid
 from weakref import WeakValueDictionary
-
 from .compatibility import (get_named_args, getargspec, PY3, unicode,
                             bind_method, Iterator)
 from .core import get_deps
@@ -25,6 +24,8 @@ system_encoding = sys.getdefaultencoding()
 if system_encoding == 'ascii':
     system_encoding = 'utf-8'
 
+if PY3:
+    from statistics import median
 
 def deepmap(func, *seqs):
     """ Apply function inside nested lists
@@ -288,6 +289,8 @@ def is_integer(i):
     return isinstance(i, Integral) or (isinstance(i, float) and i.is_integer())
 
 
+
+
 ONE_ARITY_BUILTINS = set([abs, all, any, bool, bytearray, bytes, callable, chr,
                           classmethod, complex, dict, dir, enumerate, eval,
                           float, format, frozenset, hash, hex, id, int, iter,
@@ -297,6 +300,7 @@ ONE_ARITY_BUILTINS = set([abs, all, any, bool, bytearray, bytes, callable, chr,
                           type, vars, zip, memoryview])
 if PY3:
     ONE_ARITY_BUILTINS.add(ascii)  # noqa: F821
+    ONE_ARITY_BUILTINS.add(median)
 MULTI_ARITY_BUILTINS = set([compile, delattr, divmod, filter, getattr, hasattr,
                             isinstance, issubclass, map, pow, setattr])
 

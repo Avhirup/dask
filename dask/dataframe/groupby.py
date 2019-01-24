@@ -926,6 +926,11 @@ class _GroupBy(object):
                 self.count(split_every=split_every, split_out=split_out))
 
     @derived_from(pd.core.groupby.GroupBy)
+    def median(self,split_every=None,split_out=1):
+        return self._aca_agg(token="median",func=M.median,split_every=split_every,split_out=split_out)
+
+
+    @derived_from(pd.core.groupby.GroupBy)
     def size(self, split_every=None, split_out=1):
         return self._aca_agg(token='size', func=M.size, aggfunc=M.sum,
                              split_every=split_every, split_out=split_out)

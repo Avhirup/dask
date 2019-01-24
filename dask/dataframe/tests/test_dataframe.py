@@ -2467,6 +2467,12 @@ def test_groupby_callable():
     assert_eq(a.y.groupby(iseven).sum(),
               b.y.groupby(iseven).sum())
 
+def test_groupby_median():
+    a=pd.DataFrame({"A":[1,2,1,1,2,3],"B":[5,6,2,1,3,5]})
+    a_dd=dd.from_pandas(a,npartitions=2)
+    a_dd_median=a_dd.groupby("A").median().compute()
+    a_median=a.groupby("A").median()
+    #compare both dataframes
 
 def test_methods_tokenize_differently():
     df = pd.DataFrame({'x': [1, 2, 3, 4]})
