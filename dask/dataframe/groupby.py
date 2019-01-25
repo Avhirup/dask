@@ -926,8 +926,8 @@ class _GroupBy(object):
                 self.count(split_every=split_every, split_out=split_out))
 
     @derived_from(pd.core.groupby.GroupBy)
-    def median(self,split_every=None,split_out=1):
-        return self._aca_agg(token="median",func=M.median,split_every=split_every,split_out=split_out)
+    def median(self,split_every=False,split_out=1):
+        return self._aca_agg(token="median",func=M.median,aggfunc=M.mean,split_every=split_every,split_out=split_out)
 
 
     @derived_from(pd.core.groupby.GroupBy)
